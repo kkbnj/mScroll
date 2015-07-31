@@ -18,7 +18,7 @@ Href attribute of `<a>` element must be element ID. This plug-in does not corres
 The string before ID in href attribute is ignored.
 
 
-## サンプル
+## サンプル/Sample
 
 
 ```
