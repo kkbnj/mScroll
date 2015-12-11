@@ -7,29 +7,30 @@
  * @param easing
  * @param offset
  */
-$.fn.mScroll = function(speed, easing, offset){
-    var $self = this;
-    if(typeof(offset) !== 'number') {
-        offset = 0;
-    }
+$.fn.mScroll = function(speed, easing, offset) {
+  var $self = this;
+  if(typeof(offset) !== 'number') {
+    offset = 0;
+  }
 
-    $self.each(function(){
-        var $self = $(this);
+  $self.each(function(){
+    var $self = $(this);
 
-        $self.on('click.mScroll', function(e){
-            var href = $self.attr('href');
+    $self.on('click.mScroll', function(e){
+      var href = $self.attr('href');
 
-            e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
-            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
 
-            $('html,body').not(':animated').animate({
-                scrollTop: $(href.substr(href.indexOf('#'))).offset().top + offset
-            },{
-                duration: speed,
-                easing: easing,
-                queue: false
-            });
-            return false;
-        });
+      $('html, body').not(':animated').animate({
+        scrollTop: $(href.substr(href.indexOf('#'))).offset().top + offset
+      },{
+        duration: speed,
+        easing: easing,
+        queue: false
+      });
+
+      return false;
     });
+  });
 };
