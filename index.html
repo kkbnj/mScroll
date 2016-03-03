@@ -55,7 +55,30 @@
     }
 
     .main ul {
-      margin-top: 60px;
+      max-width: 600px;
+      margin: 60px auto 0;
+    }
+
+    .main ul > li {
+      font-weight: normal;
+      text-align: left;
+
+      margin-top: 32px;
+    }
+
+    .main ul > li > a {
+      text-decoration: none;
+      display: block;
+      background-color: rgba(31, 31, 31, 0.7);
+      padding: 16px;
+    }
+
+    .main ul > li > a .ttl {
+      text-decoration: underline;
+    }
+
+    .main ul > li > a .code {
+      margin-bottom: 0;
     }
 
     .link {
@@ -139,10 +162,46 @@
       href属性で指定された要素へスムーズにスクロールします。
     </p>
 		<ul>
-			<li><a href="#box1" class="mScroll1">$('a').mScroll()</a></li>
-			<li><a href="#box2" class="mScroll2">$('a').mScroll(200)</a></li>
-			<li><a href="#box3" class="mScroll3">$('a').mScroll(null, 'easeInExpo')</a></li>
-			<li><a href="#box4" class="mScroll4">$('a').mScroll(null, null, -100)</a></li>
+			<li><a href="#box1" class="mScroll1">
+        <p class="ttl">PATTERN: 1</p>
+        <p class="code">$('a[href="#box1"]').mScroll()</p>
+      </a></li>
+			<li><a href="#box2" class="mScroll2">
+        <p class="ttl">PATTERN: 2</p>
+        <p class="code">$('a[href="#box2"]').mScroll(800, 'easeInOutExpo', -100, callback);</p>
+      </a></li>
+			<li><a href="#box3" class="mScroll3">
+        <p class="ttl">PATTERN: 3</p>
+        <p class="code">
+          $('a[href="#box3"]').mScroll({<br>
+          &nbsp;&nbsp;offset: -100,<br>
+          &nbsp;&nbsp;duration: 800,<br>
+          &nbsp;&nbsp;easing: 'easeInOutExpo',<br>
+          &nbsp;&nbsp;complete: callback<br>
+          });
+        </p>
+      </a></li>
+			<li><a href="#box1" class="mScroll4">
+        <p class="ttl">PATTERN: 4</p>
+        <p class="code">
+          $('a[href="#box3"]').mScroll({<br>
+          &nbsp;&nbsp;offset: -100,<br>
+          &nbsp;&nbsp;duration: 800,<br>
+          &nbsp;&nbsp;easing: 'easeInOutExpo',<br>
+          &nbsp;&nbsp;complete: callback<br>
+          });
+        </p>
+      </a></li>
+			<li><a href="#" class="mScroll5">
+        <p class="ttl">PATTERN: 5</p>
+        <p class="code">
+          $('.mScroll5').on('click', function(e) {<br>
+          &nbsp;&nbsp;e.preventDefault();<br>
+          <br>
+          &nbsp;&nbsp;$.mScroll('#box1', 800, 'easeInOutExpo', -100, function() {});<br>
+          });<br>
+        </p>
+      </a></li>
 		</ul>
     <div class="link">
       <p>Please use this plug-in via GitHub. / GitHubからご利用ください。</p>
@@ -159,11 +218,8 @@
 	<div id="box3" class="box">
 		<p>BOX3</p>
 	</div>
-	<div id="box4" class="box">
-		<p>BOX4</p>
-	</div>
 
-  <div><a href="#pagetop" class="pagetop"></a></div>
+  <div><a href="#" class="pagetop"></a></div>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
@@ -242,9 +298,19 @@ jQuery.easing.jswing=jQuery.easing.swing;jQuery.extend(jQuery.easing,{def:"easeO
 <script>
 	$(function() {
 		$('.mScroll1').mScroll();
-    $('.mScroll2').mScroll(200);
-    $('.mScroll3').mScroll(null, 'easeInExpo');
-    $('.mScroll4').mScroll(null, null, -100);
+    $('.mScroll2').mScroll(800, 'easeInOutExpo', -100, function() {});
+    $('.mScroll3').mScroll({
+      offset: -100,
+      duration: 800,
+      easing: 'easeInOutExpo',
+      complete: function() {}
+    });
+    $('.mScroll4').mScroll(800, 'easeInOutExpo', -100, function() {});
+    $('.mScroll5').on('click', function(e) {
+      e.preventDefault();
+
+      $.mScroll('#box1', 800, 'easeInOutExpo', -100, function() {});
+    });
     $('.pagetop').mScroll();
 	});
 </script>
