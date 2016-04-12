@@ -1,5 +1,5 @@
 /*!
- * jQuery method mScroll v2.0
+ * jQuery method mScroll v2.1
  * Copyright 2015-2016 maam.inc
  * Contributing Author: Hiroki Homma
  * Require for jQuery v1.7 or above
@@ -66,13 +66,23 @@
 
     target_position += params.offset;
 
+    $(window).on('mousewheel.mScroll touchstart.mScroll keydown.mScroll', function(e) {
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    });
+
     $('html, body').not(':animated').animate({
       scrollTop: target_position
     }, {
       duration: params.duration,
       easing: params.easing,
       queue: params.queue
-    }).promise().then(params.complete);
+    }).promise().then(function() {
+      $(window).off('mousewheel.mScroll touchstart.mScroll keydown.mScroll');
+
+      if(typeof params.complete === 'function') {
+        params.complete();
+      }
+    });
 
     return false;
   };
